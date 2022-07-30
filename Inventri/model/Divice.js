@@ -20,6 +20,12 @@ const deviceSchema =new Schema({
         require:true,
 
       },
+      Date_added:{
+        type:String,
+        required:true,
+    }
+   
+    
       
      
 })

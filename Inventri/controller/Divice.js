@@ -3,12 +3,13 @@ const Joi = require("joi")
 const jwt=require('jsonwebtoken')
 exports.adddevice=async(req,res)=>{
     try{
-        let{imei,serial,model,manufacturer,}=req.body
+        let{imei,serial,model,manufacturer, Date_added}=req.body
         const user=Joi.object({
             imei:Joi.string().required(),
             serial:Joi.string().required(),
             model:Joi.string().required(),
             manufacturer:Joi.string().required(),
+            Date_added:Joi.string().required(),
         })
            let result=user.validate(req.body)
 
@@ -23,8 +24,8 @@ exports.adddevice=async(req,res)=>{
              
              }else{
                
-              const alluser = new device({
-                imei,serial,model,manufacturer,
+              const alluser=new device({
+                imei,serial,model,manufacturer, Date_added
               })
              const saveuser =await alluser.save();
              res.status(200).json({message:"device is save ",saveuser}) 

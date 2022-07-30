@@ -3,13 +3,14 @@ const Joi = require("joi")
 const jwt=require('jsonwebtoken')
 exports.addsim=async(req,res)=>{
     try{
-        let{serial,phone,seller,operator,providedBy,}=req.body
+        let{serial,phone,seller,operator,providedBy,Date_added}=req.body
         const user = Joi.object({                                                     
             serial:Joi.string().required(),
             phone:Joi.string().required(),
             seller:Joi.string().required(),
             operator: Joi.string().required(),
             providedBy: Joi.string().required(),
+            Date_added:Joi.string().required(),
            })
            let result =user.validate(req.body)
            if(result.error){
@@ -24,7 +25,7 @@ exports.addsim=async(req,res)=>{
              }else{
                
               const alluser=new Sim({
-                serial,phone,seller,operator,providedBy,
+                serial,phone,seller,operator,providedBy,Date_added
               })
              const saveuser =await alluser.save();
              res.status(200).json({message:"sim is save",saveuser}) 
